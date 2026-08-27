@@ -1,0 +1,1512 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Mapa Emocional | Lívia Melo Psicóloga</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400;1,600&family=Lato:wght@300;400;700&display=swap');
+
+:root {
+  --navy: #1A2E4A;
+  --gold: #B8922A;
+  --gold-light: #d4a93a;
+  --white: #ffffff;
+  --cream: #faf8f4;
+  --gray: #6b7280;
+  --gray-light: #f3f4f6;
+  --border: #e5e7eb;
+  --red: #dc2626;
+  --green: #16a34a;
+  --amber: #d97706;
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+body {
+  font-family: 'Lato', sans-serif;
+  background: var(--cream);
+  color: var(--navy);
+  min-height: 100vh;
+}
+
+.hero {
+  background: var(--navy);
+  padding: 56px 24px 44px;
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+}
+
+.hero::before {
+  content: '';
+  position: absolute;
+  top: -80px; left: 50%;
+  transform: translateX(-50%);
+  width: 500px; height: 500px;
+  background: radial-gradient(circle, rgba(184,146,42,0.10) 0%, transparent 70%);
+  pointer-events: none;
+}
+
+.hero-badge {
+  display: inline-block;
+  background: rgba(184,146,42,0.15);
+  border: 1px solid rgba(184,146,42,0.35);
+  color: var(--gold-light);
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  padding: 6px 16px;
+  border-radius: 20px;
+  margin-bottom: 20px;
+}
+
+.hero h1 {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: clamp(38px, 7vw, 60px);
+  font-weight: 600;
+  font-style: italic;
+  color: var(--white);
+  line-height: 1.1;
+  margin-bottom: 14px;
+}
+
+.hero h1 span { color: var(--gold-light); }
+
+.hero-sub {
+  font-size: 15px;
+  font-weight: 300;
+  color: rgba(255,255,255,0.72);
+  max-width: 460px;
+  margin: 0 auto 28px;
+  line-height: 1.65;
+}
+
+.hero-divider {
+  width: 44px; height: 2px;
+  background: var(--gold);
+  margin: 0 auto 28px;
+}
+
+.hero-promise {
+  display: flex;
+  justify-content: center;
+  gap: 28px;
+  flex-wrap: wrap;
+}
+
+.promise-item {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  color: rgba(255,255,255,0.82);
+  font-size: 13px;
+}
+
+.promise-icon {
+  width: 18px; height: 18px;
+  background: var(--gold);
+  border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 10px;
+  color: var(--navy);
+  font-weight: 700;
+  flex-shrink: 0;
+}
+
+.progress-wrap {
+  background: var(--white);
+  border-bottom: 1px solid var(--border);
+  padding: 14px 24px;
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+}
+
+.progress-inner { max-width: 660px; margin: 0 auto; }
+
+.progress-label {
+  display: flex;
+  justify-content: space-between;
+  font-size: 12px;
+  color: var(--gray);
+  margin-bottom: 7px;
+}
+
+.progress-bar {
+  height: 4px;
+  background: var(--gray-light);
+  border-radius: 4px;
+  overflow: hidden;
+}
+
+.progress-fill {
+  height: 100%;
+  background: linear-gradient(90deg, var(--navy), var(--gold));
+  border-radius: 4px;
+  transition: width 0.5s ease;
+}
+
+.form-container {
+  max-width: 660px;
+  margin: 0 auto;
+  padding: 36px 24px 60px;
+}
+
+.step { display: none; animation: fadeIn 0.35s ease; }
+.step.active { display: block; }
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.step-header { margin-bottom: 26px; }
+
+.step-number {
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: var(--gold);
+  margin-bottom: 7px;
+}
+
+.step-title {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: clamp(22px, 4vw, 28px);
+  font-weight: 600;
+  color: var(--navy);
+  line-height: 1.3;
+  margin-bottom: 6px;
+}
+
+.step-desc {
+  font-size: 14px;
+  color: var(--gray);
+  line-height: 1.6;
+}
+
+.field { margin-bottom: 18px; }
+
+.field label {
+  display: block;
+  font-size: 14px;
+  font-weight: 700;
+  color: var(--navy);
+  margin-bottom: 7px;
+}
+
+.field input, .field select {
+  width: 100%;
+  padding: 13px 15px;
+  border: 1.5px solid var(--border);
+  border-radius: 8px;
+  font-family: 'Lato', sans-serif;
+  font-size: 15px;
+  color: var(--navy);
+  background: var(--white);
+  transition: border-color 0.2s;
+  outline: none;
+}
+
+.field input:focus, .field select:focus { border-color: var(--gold); }
+.field input::placeholder { color: #b0b7c3; }
+
+.options-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 9px;
+}
+
+.options-grid.single { grid-template-columns: 1fr; }
+
+.option-btn {
+  padding: 13px 15px;
+  border: 1.5px solid var(--border);
+  border-radius: 10px;
+  background: var(--white);
+  font-family: 'Lato', sans-serif;
+  font-size: 14px;
+  color: var(--navy);
+  cursor: pointer;
+  text-align: left;
+  transition: all 0.2s;
+  line-height: 1.4;
+  display: flex;
+  align-items: flex-start;
+  gap: 9px;
+}
+
+.option-btn:hover { border-color: var(--gold); background: rgba(184,146,42,0.04); }
+
+.option-btn.selected {
+  border-color: var(--gold);
+  background: rgba(184,146,42,0.08);
+  font-weight: 700;
+}
+
+.option-btn .opt-icon { font-size: 17px; flex-shrink: 0; margin-top: 1px; }
+.option-btn .opt-text { flex: 1; }
+
+.option-btn .opt-check {
+  width: 17px; height: 17px;
+  border: 2px solid var(--border);
+  border-radius: 50%;
+  flex-shrink: 0;
+  margin-top: 2px;
+  transition: all 0.2s;
+  display: flex; align-items: center; justify-content: center;
+}
+
+.option-btn.selected .opt-check { background: var(--gold); border-color: var(--gold); }
+.option-btn.selected .opt-check::after { content: '✓'; font-size: 9px; color: white; font-weight: 700; }
+
+.scale-wrap { margin-bottom: 22px; }
+
+.scale-question {
+  font-size: 14px;
+  font-weight: 700;
+  color: var(--navy);
+  margin-bottom: 9px;
+  line-height: 1.4;
+}
+
+.scale-buttons { display: flex; gap: 6px; }
+
+.scale-btn {
+  flex: 1;
+  height: 46px;
+  max-width: 54px;
+  border: 1.5px solid var(--border);
+  border-radius: 8px;
+  background: var(--white);
+  font-family: 'Lato', sans-serif;
+  font-size: 14px;
+  font-weight: 700;
+  color: var(--gray);
+  cursor: pointer;
+  transition: all 0.2s;
+  display: flex; align-items: center; justify-content: center;
+}
+
+.scale-btn:hover { border-color: var(--gold); color: var(--navy); }
+.scale-btn.selected { background: var(--navy); border-color: var(--navy); color: var(--white); }
+
+.scale-labels {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 5px;
+  font-size: 11px;
+  color: var(--gray);
+}
+
+.nav-buttons { display: flex; gap: 10px; margin-top: 28px; }
+
+.btn-back {
+  padding: 13px 22px;
+  border: 1.5px solid var(--border);
+  border-radius: 10px;
+  background: transparent;
+  font-family: 'Lato', sans-serif;
+  font-size: 15px;
+  color: var(--gray);
+  cursor: pointer;
+  transition: all 0.2s;
+  white-space: nowrap;
+}
+
+.btn-back:hover { border-color: var(--navy); color: var(--navy); }
+
+.btn-next {
+  flex: 1;
+  padding: 15px 22px;
+  border: none;
+  border-radius: 10px;
+  background: var(--navy);
+  font-family: 'Lato', sans-serif;
+  font-size: 15px;
+  font-weight: 700;
+  color: var(--white);
+  cursor: pointer;
+  transition: all 0.2s;
+  letter-spacing: 0.4px;
+}
+
+.btn-next:hover { background: #243d61; }
+
+.btn-next.gold {
+  background: linear-gradient(135deg, var(--gold), var(--gold-light));
+  color: var(--navy);
+}
+
+.error-msg { display: none; color: var(--red); font-size: 13px; margin-top: 8px; }
+.error-msg.show { display: block; }
+
+/* RESULTADO */
+.result-header {
+  background: var(--navy);
+  border-radius: 14px;
+  padding: 32px 24px 28px;
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.result-badge {
+  display: inline-block;
+  padding: 5px 14px;
+  border-radius: 20px;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  margin-bottom: 14px;
+}
+
+.badge-alto { background: rgba(220,38,38,0.2); color: #fca5a5; }
+.badge-moderado { background: rgba(217,119,6,0.2); color: #fcd34d; }
+.badge-leve { background: rgba(22,163,74,0.2); color: #86efac; }
+
+.result-icon-big { font-size: 44px; margin-bottom: 12px; }
+
+.result-main-title {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: clamp(22px, 4vw, 28px);
+  font-weight: 600;
+  font-style: italic;
+  color: var(--white);
+  line-height: 1.3;
+  margin-bottom: 10px;
+}
+
+.result-main-sub {
+  font-size: 14px;
+  color: rgba(255,255,255,0.68);
+  line-height: 1.6;
+  max-width: 480px;
+  margin: 0 auto;
+}
+
+/* MINI LAUDO */
+.laudo-section {
+  background: var(--white);
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  padding: 24px 20px;
+  margin-bottom: 16px;
+}
+
+.laudo-section-title {
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: var(--gold);
+  margin-bottom: 16px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.laudo-section-title::after {
+  content: '';
+  flex: 1;
+  height: 1px;
+  background: var(--border);
+}
+
+/* GRÁFICO POR ÁREA */
+.area-chart { display: flex; flex-direction: column; gap: 14px; }
+
+.area-row {}
+
+.area-label-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 5px;
+}
+
+.area-name {
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--navy);
+}
+
+.area-pct {
+  font-size: 13px;
+  font-weight: 700;
+}
+
+.area-bar-bg {
+  height: 9px;
+  background: var(--gray-light);
+  border-radius: 6px;
+  overflow: hidden;
+  margin-bottom: 3px;
+}
+
+.area-bar-fill {
+  height: 100%;
+  border-radius: 6px;
+  transition: width 1.2s ease;
+}
+
+.bar-low { background: linear-gradient(90deg, #16a34a, #4ade80); }
+.bar-mid { background: linear-gradient(90deg, #d97706, #fbbf24); }
+.bar-high { background: linear-gradient(90deg, #dc2626, #f87171); }
+
+.area-note {
+  font-size: 12px;
+  color: var(--gray);
+  line-height: 1.4;
+}
+
+/* ANÁLISE POR ÁREA */
+.area-analysis { display: flex; flex-direction: column; gap: 16px; }
+
+.analysis-card {
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 14px 16px;
+  border-left: 4px solid var(--gold);
+}
+
+.analysis-card.alert { border-left-color: var(--red); }
+.analysis-card.warning { border-left-color: var(--amber); }
+.analysis-card.ok { border-left-color: var(--green); }
+
+.analysis-card-title {
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--navy);
+  margin-bottom: 5px;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.analysis-card-text {
+  font-size: 13px;
+  color: var(--gray);
+  line-height: 1.55;
+}
+
+/* INDICADORES */
+.indicators-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+}
+
+.indicator-chip {
+  padding: 10px 12px;
+  border-radius: 8px;
+  font-size: 13px;
+  display: flex;
+  align-items: flex-start;
+  gap: 8px;
+  line-height: 1.35;
+}
+
+.chip-alert { background: rgba(220,38,38,0.07); color: #991b1b; }
+.chip-warn { background: rgba(217,119,6,0.07); color: #92400e; }
+.chip-ok { background: rgba(22,163,74,0.07); color: #166534; }
+
+.chip-icon { font-size: 15px; flex-shrink: 0; }
+
+/* PRÓXIMOS PASSOS */
+.steps-list { display: flex; flex-direction: column; gap: 12px; }
+
+.step-item {
+  display: flex;
+  gap: 12px;
+  align-items: flex-start;
+}
+
+.step-num {
+  width: 26px; height: 26px;
+  background: var(--navy);
+  border-radius: 50%;
+  color: white;
+  font-size: 12px;
+  font-weight: 700;
+  display: flex; align-items: center; justify-content: center;
+  flex-shrink: 0;
+  margin-top: 1px;
+}
+
+.step-item-text { font-size: 14px; color: var(--navy); line-height: 1.5; }
+.step-item-text strong { font-weight: 700; display: block; margin-bottom: 2px; }
+.step-item-text span { color: var(--gray); font-size: 13px; }
+
+/* CTA */
+.cta-section {
+  background: var(--navy);
+  border-radius: 14px;
+  padding: 28px 22px;
+  text-align: center;
+  margin-bottom: 16px;
+}
+
+.cta-section h3 {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 24px;
+  font-weight: 600;
+  color: var(--white);
+  margin-bottom: 8px;
+  line-height: 1.3;
+}
+
+.cta-section p {
+  font-size: 14px;
+  color: rgba(255,255,255,0.68);
+  margin-bottom: 20px;
+  line-height: 1.6;
+}
+
+.btn-whatsapp {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  width: 100%;
+  padding: 17px 22px;
+  background: #25D366;
+  border: none;
+  border-radius: 12px;
+  font-family: 'Lato', sans-serif;
+  font-size: 16px;
+  font-weight: 700;
+  color: var(--white);
+  cursor: pointer;
+  text-decoration: none;
+  transition: all 0.2s;
+}
+
+.btn-whatsapp:hover { background: #20bd5a; transform: translateY(-1px); }
+.btn-whatsapp svg { width: 22px; height: 22px; fill: white; flex-shrink: 0; }
+
+.urgency-note {
+  font-size: 12px;
+  color: rgba(255,255,255,0.5);
+  margin-top: 10px;
+}
+
+.footer-sig {
+  text-align: center;
+  margin-top: 36px;
+  padding-top: 22px;
+  border-top: 1px solid var(--border);
+}
+
+.footer-sig p { font-size: 13px; color: var(--gray); line-height: 1.7; }
+.footer-sig strong { color: var(--navy); font-weight: 700; }
+.footer-sig span { color: var(--gold); }
+
+.separator {
+  height: 1px;
+  background: var(--border);
+  margin: 20px 0;
+}
+
+@media (max-width: 480px) {
+  .options-grid { grid-template-columns: 1fr; }
+  .indicators-grid { grid-template-columns: 1fr; }
+  .hero { padding: 40px 18px 32px; }
+  .form-container { padding: 24px 14px 48px; }
+  .hero-promise { gap: 14px; flex-direction: column; align-items: center; }
+  .scale-buttons { gap: 4px; }
+  .scale-btn { max-width: 44px; height: 42px; font-size: 13px; }
+}
+</style>
+</head>
+<body>
+
+<div class="hero">
+  <div class="hero-badge">Avaliação Gratuita</div>
+  <h1>Mapa<br><span>Emocional</span></h1>
+  <p class="hero-sub">Uma análise detalhada do seu estado emocional, cognitivo e comportamental, desenvolvida por neuropsicóloga especialista.</p>
+  <div class="hero-divider"></div>
+  <div class="hero-promise">
+    <div class="promise-item"><div class="promise-icon">✓</div><span>100% gratuito</span></div>
+    <div class="promise-item"><div class="promise-icon">✓</div><span>5 minutos</span></div>
+    <div class="promise-item"><div class="promise-icon">✓</div><span>Resultado detalhado</span></div>
+  </div>
+</div>
+
+<div class="progress-wrap">
+  <div class="progress-inner">
+    <div class="progress-label">
+      <span id="progressText">Etapa 1 de 9</span>
+      <span id="progressPct">0%</span>
+    </div>
+    <div class="progress-bar"><div class="progress-fill" id="progressFill" style="width:0%"></div></div>
+  </div>
+</div>
+
+<div class="form-container">
+
+<!-- STEP 1: Dados pessoais -->
+<div class="step active" id="step1">
+  <div class="step-header">
+    <div class="step-number">Etapa 01 · Identificação</div>
+    <div class="step-title">Vamos começar com algumas informações sobre você</div>
+    <div class="step-desc">Seus dados são confidenciais e usados apenas para personalizar sua análise.</div>
+  </div>
+  <div class="field">
+    <label>Como você se chama?</label>
+    <input type="text" id="nome" placeholder="Seu nome completo">
+  </div>
+  <div class="field">
+    <label>Qual sua idade?</label>
+    <select id="idade">
+      <option value="">Selecione</option>
+      <option value="18-24">18 a 24 anos</option>
+      <option value="25-34">25 a 34 anos</option>
+      <option value="35-44">35 a 44 anos</option>
+      <option value="45-54">45 a 54 anos</option>
+      <option value="55+">55 anos ou mais</option>
+    </select>
+  </div>
+  <div class="field">
+    <label>Onde você mora?</label>
+    <input type="text" id="cidade" placeholder="Cidade / País (se estiver no exterior)">
+  </div>
+  <div class="field">
+    <label>Qual é sua situação profissional atual?</label>
+    <select id="profissao">
+      <option value="">Selecione</option>
+      <option value="empregado">Empregado(a) com carteira assinada</option>
+      <option value="autonomo">Autônomo(a) / Freelancer</option>
+      <option value="empresario">Empresário(a)</option>
+      <option value="desempregado">Desempregado(a) / Em transição</option>
+      <option value="estudante">Estudante</option>
+      <option value="aposentado">Aposentado(a)</option>
+    </select>
+  </div>
+  <div id="err1" class="error-msg">Por favor, preencha todos os campos para continuar.</div>
+  <div class="nav-buttons">
+    <button class="btn-next" onclick="nextStep(1)">Continuar →</button>
+  </div>
+</div>
+
+<!-- STEP 2: Queixa principal -->
+<div class="step" id="step2">
+  <div class="step-header">
+    <div class="step-number">Etapa 02 · Queixa Principal</div>
+    <div class="step-title">O que mais está pesando em você agora?</div>
+    <div class="step-desc">Selecione tudo que faz sentido. Não precisa escolher apenas um.</div>
+  </div>
+  <div class="options-grid single" id="queixaGrid">
+    <button class="option-btn" onclick="toggleOption(this,'queixa')">
+      <span class="opt-icon">😰</span><span class="opt-text">Ansiedade e preocupação constante que não passa</span><span class="opt-check"></span>
+    </button>
+    <button class="option-btn" onclick="toggleOption(this,'queixa')">
+      <span class="opt-icon">🪫</span><span class="opt-text">Exaustão total, sensação de estar no limite (burnout)</span><span class="opt-check"></span>
+    </button>
+    <button class="option-btn" onclick="toggleOption(this,'queixa')">
+      <span class="opt-icon">🌫️</span><span class="opt-text">Dificuldade de concentração, memória e foco</span><span class="opt-check"></span>
+    </button>
+    <button class="option-btn" onclick="toggleOption(this,'queixa')">
+      <span class="opt-icon">🔀</span><span class="opt-text">Confusão sobre o futuro: carreira, vida, próximos passos</span><span class="opt-check"></span>
+    </button>
+    <button class="option-btn" onclick="toggleOption(this,'queixa')">
+      <span class="opt-icon">😶</span><span class="opt-text">Sentimento de que algo está errado, mas não sei o quê</span><span class="opt-check"></span>
+    </button>
+    <button class="option-btn" onclick="toggleOption(this,'queixa')">
+      <span class="opt-icon">🧩</span><span class="opt-text">Suspeita de TDAH, autismo ou outro perfil neurológico</span><span class="opt-check"></span>
+    </button>
+    <button class="option-btn" onclick="toggleOption(this,'queixa')">
+      <span class="opt-icon">😔</span><span class="opt-text">Tristeza persistente, desânimo ou falta de prazer</span><span class="opt-check"></span>
+    </button>
+    <button class="option-btn" onclick="toggleOption(this,'queixa')">
+      <span class="opt-icon">💔</span><span class="opt-text">Dificuldades em relacionamentos ou isolamento social</span><span class="opt-check"></span>
+    </button>
+  </div>
+  <div id="err2" class="error-msg">Selecione pelo menos uma opção para continuar.</div>
+  <div class="nav-buttons">
+    <button class="btn-back" onclick="prevStep(2)">← Voltar</button>
+    <button class="btn-next" onclick="nextStep(2)">Continuar →</button>
+  </div>
+</div>
+
+<!-- STEP 3: Escalas cognitivas e emocionais -->
+<div class="step" id="step3">
+  <div class="step-header">
+    <div class="step-number">Etapa 03 · Funcionamento Cognitivo e Emocional</div>
+    <div class="step-title">Com que frequência você experimenta as situações abaixo?</div>
+    <div class="step-desc">1 = quase nunca &nbsp;|&nbsp; 5 = o tempo todo</div>
+  </div>
+
+  <div class="scale-wrap">
+    <div class="scale-question">Tenho dificuldade de manter a atenção em uma tarefa sem me distrair.</div>
+    <div class="scale-buttons" data-scale="atencao1">
+      <button class="scale-btn" onclick="selectScale(this,'atencao1',1)">1</button>
+      <button class="scale-btn" onclick="selectScale(this,'atencao1',2)">2</button>
+      <button class="scale-btn" onclick="selectScale(this,'atencao1',3)">3</button>
+      <button class="scale-btn" onclick="selectScale(this,'atencao1',4)">4</button>
+      <button class="scale-btn" onclick="selectScale(this,'atencao1',5)">5</button>
+    </div>
+  </div>
+
+  <div class="scale-wrap">
+    <div class="scale-question">Esqueço coisas recentes, compromissos ou onde coloquei objetos.</div>
+    <div class="scale-buttons" data-scale="memoria1">
+      <button class="scale-btn" onclick="selectScale(this,'memoria1',1)">1</button>
+      <button class="scale-btn" onclick="selectScale(this,'memoria1',2)">2</button>
+      <button class="scale-btn" onclick="selectScale(this,'memoria1',3)">3</button>
+      <button class="scale-btn" onclick="selectScale(this,'memoria1',4)">4</button>
+      <button class="scale-btn" onclick="selectScale(this,'memoria1',5)">5</button>
+    </div>
+  </div>
+
+  <div class="scale-wrap">
+    <div class="scale-question">Sinto que meu raciocínio está mais lento do que antes.</div>
+    <div class="scale-buttons" data-scale="cognitivo1">
+      <button class="scale-btn" onclick="selectScale(this,'cognitivo1',1)">1</button>
+      <button class="scale-btn" onclick="selectScale(this,'cognitivo1',2)">2</button>
+      <button class="scale-btn" onclick="selectScale(this,'cognitivo1',3)">3</button>
+      <button class="scale-btn" onclick="selectScale(this,'cognitivo1',4)">4</button>
+      <button class="scale-btn" onclick="selectScale(this,'cognitivo1',5)">5</button>
+    </div>
+  </div>
+
+  <div class="scale-wrap">
+    <div class="scale-question">Tenho dificuldade de me organizar ou planejar tarefas do dia a dia.</div>
+    <div class="scale-buttons" data-scale="exec1">
+      <button class="scale-btn" onclick="selectScale(this,'exec1',1)">1</button>
+      <button class="scale-btn" onclick="selectScale(this,'exec1',2)">2</button>
+      <button class="scale-btn" onclick="selectScale(this,'exec1',3)">3</button>
+      <button class="scale-btn" onclick="selectScale(this,'exec1',4)">4</button>
+      <button class="scale-btn" onclick="selectScale(this,'exec1',5)">5</button>
+    </div>
+  </div>
+
+  <div class="scale-wrap">
+    <div class="scale-question">Me sinto emocionalmente esgotado, sem energia para o que antes gostava.</div>
+    <div class="scale-buttons" data-scale="emocao1">
+      <button class="scale-btn" onclick="selectScale(this,'emocao1',1)">1</button>
+      <button class="scale-btn" onclick="selectScale(this,'emocao1',2)">2</button>
+      <button class="scale-btn" onclick="selectScale(this,'emocao1',3)">3</button>
+      <button class="scale-btn" onclick="selectScale(this,'emocao1',4)">4</button>
+      <button class="scale-btn" onclick="selectScale(this,'emocao1',5)">5</button>
+    </div>
+  </div>
+
+  <div class="scale-wrap">
+    <div class="scale-question">Tenho pensamentos acelerados ou preocupações que não consigo controlar.</div>
+    <div class="scale-buttons" data-scale="ansiedade1">
+      <button class="scale-btn" onclick="selectScale(this,'ansiedade1',1)">1</button>
+      <button class="scale-btn" onclick="selectScale(this,'ansiedade1',2)">2</button>
+      <button class="scale-btn" onclick="selectScale(this,'ansiedade1',3)">3</button>
+      <button class="scale-btn" onclick="selectScale(this,'ansiedade1',4)">4</button>
+      <button class="scale-btn" onclick="selectScale(this,'ansiedade1',5)">5</button>
+    </div>
+  </div>
+
+  <div id="err3" class="error-msg">Responda todas as perguntas para continuar.</div>
+  <div class="nav-buttons">
+    <button class="btn-back" onclick="prevStep(3)">← Voltar</button>
+    <button class="btn-next" onclick="nextStep(3)">Continuar →</button>
+  </div>
+</div>
+
+<!-- STEP 4: Sono -->
+<div class="step" id="step4">
+  <div class="step-header">
+    <div class="step-number">Etapa 04 · Qualidade do Sono</div>
+    <div class="step-title">Como está o seu sono?</div>
+    <div class="step-desc">O sono é um dos principais indicadores do estado neurológico e emocional.</div>
+  </div>
+
+  <div class="field">
+    <label>Quantas horas você dorme por noite, em média?</label>
+    <select id="horasSono">
+      <option value="">Selecione</option>
+      <option value="menos4">Menos de 4 horas</option>
+      <option value="4a6">Entre 4 e 6 horas</option>
+      <option value="6a8">Entre 6 e 8 horas</option>
+      <option value="mais8">Mais de 8 horas</option>
+    </select>
+  </div>
+
+  <div class="scale-wrap">
+    <div class="scale-question">Tenho dificuldade para pegar no sono ou acordo durante a madrugada.</div>
+    <div class="scale-buttons" data-scale="sono1">
+      <button class="scale-btn" onclick="selectScale(this,'sono1',1)">1</button>
+      <button class="scale-btn" onclick="selectScale(this,'sono1',2)">2</button>
+      <button class="scale-btn" onclick="selectScale(this,'sono1',3)">3</button>
+      <button class="scale-btn" onclick="selectScale(this,'sono1',4)">4</button>
+      <button class="scale-btn" onclick="selectScale(this,'sono1',5)">5</button>
+    </div>
+    <div class="scale-labels"><span>Quase nunca</span><span>O tempo todo</span></div>
+  </div>
+
+  <div class="scale-wrap">
+    <div class="scale-question">Acordo cansado(a), como se o descanso não tivesse sido suficiente.</div>
+    <div class="scale-buttons" data-scale="sono2">
+      <button class="scale-btn" onclick="selectScale(this,'sono2',1)">1</button>
+      <button class="scale-btn" onclick="selectScale(this,'sono2',2)">2</button>
+      <button class="scale-btn" onclick="selectScale(this,'sono2',3)">3</button>
+      <button class="scale-btn" onclick="selectScale(this,'sono2',4)">4</button>
+      <button class="scale-btn" onclick="selectScale(this,'sono2',5)">5</button>
+    </div>
+    <div class="scale-labels"><span>Quase nunca</span><span>O tempo todo</span></div>
+  </div>
+
+  <div class="options-grid single" id="sonoGrid">
+    <div class="field" style="margin-bottom:8px"><label>Você tem algum desses padrões de sono? (selecione os que se aplicam)</label></div>
+    <button class="option-btn" onclick="toggleOption(this,'sonoExtra')">
+      <span class="opt-icon">🌙</span><span class="opt-text">Pensamentos que não param na hora de dormir</span><span class="opt-check"></span>
+    </button>
+    <button class="option-btn" onclick="toggleOption(this,'sonoExtra')">
+      <span class="opt-icon">😱</span><span class="opt-text">Pesadelos frequentes ou sono agitado</span><span class="opt-check"></span>
+    </button>
+    <button class="option-btn" onclick="toggleOption(this,'sonoExtra')">
+      <span class="opt-icon">🌅</span><span class="opt-text">Dificuldade extrema de acordar pela manhã</span><span class="opt-check"></span>
+    </button>
+    <button class="option-btn" onclick="toggleOption(this,'sonoExtra')">
+      <span class="opt-icon">😴</span><span class="opt-text">Sonolência excessiva durante o dia</span><span class="opt-check"></span>
+    </button>
+    <button class="option-btn" onclick="toggleOption(this,'sonoExtra')">
+      <span class="opt-icon">✅</span><span class="opt-text">Meu sono está razoável, não é um problema</span><span class="opt-check"></span>
+    </button>
+  </div>
+
+  <div id="err4" class="error-msg">Por favor, preencha os campos de sono para continuar.</div>
+  <div class="nav-buttons">
+    <button class="btn-back" onclick="prevStep(4)">← Voltar</button>
+    <button class="btn-next" onclick="nextStep(4)">Continuar →</button>
+  </div>
+</div>
+
+<!-- STEP 5: Relacionamentos -->
+<div class="step" id="step5">
+  <div class="step-header">
+    <div class="step-number">Etapa 05 · Vínculos e Relacionamentos</div>
+    <div class="step-title">Como estão seus relacionamentos e vida social?</div>
+    <div class="step-desc">Vínculos afetivos têm impacto direto na saúde mental e cognitiva.</div>
+  </div>
+
+  <div class="scale-wrap">
+    <div class="scale-question">Tenho me isolado das pessoas, evitando encontros ou conversas.</div>
+    <div class="scale-buttons" data-scale="rel1">
+      <button class="scale-btn" onclick="selectScale(this,'rel1',1)">1</button>
+      <button class="scale-btn" onclick="selectScale(this,'rel1',2)">2</button>
+      <button class="scale-btn" onclick="selectScale(this,'rel1',3)">3</button>
+      <button class="scale-btn" onclick="selectScale(this,'rel1',4)">4</button>
+      <button class="scale-btn" onclick="selectScale(this,'rel1',5)">5</button>
+    </div>
+    <div class="scale-labels"><span>Quase nunca</span><span>O tempo todo</span></div>
+  </div>
+
+  <div class="scale-wrap">
+    <div class="scale-question">Sinto que as pessoas ao meu redor não me entendem de verdade.</div>
+    <div class="scale-buttons" data-scale="rel2">
+      <button class="scale-btn" onclick="selectScale(this,'rel2',1)">1</button>
+      <button class="scale-btn" onclick="selectScale(this,'rel2',2)">2</button>
+      <button class="scale-btn" onclick="selectScale(this,'rel2',3)">3</button>
+      <button class="scale-btn" onclick="selectScale(this,'rel2',4)">4</button>
+      <button class="scale-btn" onclick="selectScale(this,'rel2',5)">5</button>
+    </div>
+    <div class="scale-labels"><span>Quase nunca</span><span>O tempo todo</span></div>
+  </div>
+
+  <div class="scale-wrap">
+    <div class="scale-question">Tenho conflitos frequentes ou dificuldade em me comunicar com pessoas próximas.</div>
+    <div class="scale-buttons" data-scale="rel3">
+      <button class="scale-btn" onclick="selectScale(this,'rel3',1)">1</button>
+      <button class="scale-btn" onclick="selectScale(this,'rel3',2)">2</button>
+      <button class="scale-btn" onclick="selectScale(this,'rel3',3)">3</button>
+      <button class="scale-btn" onclick="selectScale(this,'rel3',4)">4</button>
+      <button class="scale-btn" onclick="selectScale(this,'rel3',5)">5</button>
+    </div>
+    <div class="scale-labels"><span>Quase nunca</span><span>O tempo todo</span></div>
+  </div>
+
+  <div class="field" style="margin-top:18px">
+    <label>Como você descreveria sua rede de apoio hoje?</label>
+    <select id="redeApoio">
+      <option value="">Selecione</option>
+      <option value="forte">Tenho pessoas próximas em quem confio</option>
+      <option value="limitada">Tenho poucos vínculos de confiança</option>
+      <option value="fragil">Me sinto sozinho(a) na maioria das situações</option>
+      <option value="evito">Evito depender de outras pessoas</option>
+    </select>
+  </div>
+
+  <div id="err5" class="error-msg">Responda todas as perguntas para continuar.</div>
+  <div class="nav-buttons">
+    <button class="btn-back" onclick="prevStep(5)">← Voltar</button>
+    <button class="btn-next" onclick="nextStep(5)">Continuar →</button>
+  </div>
+</div>
+
+<!-- STEP 6: Histórico de tratamento -->
+<div class="step" id="step6">
+  <div class="step-header">
+    <div class="step-number">Etapa 06 · Histórico de Tratamento</div>
+    <div class="step-title">Você já buscou algum tipo de ajuda profissional?</div>
+    <div class="step-desc">Essas informações ajudam a entender melhor o seu histórico e o que ainda precisa ser investigado.</div>
+  </div>
+
+  <div class="field">
+    <label>Você já fez psicoterapia?</label>
+    <select id="terapia">
+      <option value="">Selecione</option>
+      <option value="nunca">Nunca fiz</option>
+      <option value="fiz">Já fiz, mas parei</option>
+      <option value="faco">Estou em terapia atualmente</option>
+    </select>
+  </div>
+
+  <div class="field">
+    <label>Você usa ou já usou medicação psiquiátrica?</label>
+    <select id="medicacao">
+      <option value="">Selecione</option>
+      <option value="nunca">Nunca usei</option>
+      <option value="passado">Já usei, mas não uso mais</option>
+      <option value="uso">Uso atualmente</option>
+      <option value="indicado">Foi indicado, mas não comecei</option>
+    </select>
+  </div>
+
+  <div class="field">
+    <label>Você já recebeu algum diagnóstico anteriormente?</label>
+    <select id="diagnosticoAnterior">
+      <option value="">Selecione</option>
+      <option value="nao">Não, nunca tive diagnóstico</option>
+      <option value="ansiedade">Sim: Ansiedade / Transtorno de Ansiedade</option>
+      <option value="depressao">Sim: Depressão</option>
+      <option value="tdah">Sim: TDAH</option>
+      <option value="burnout">Sim: Burnout</option>
+      <option value="outro">Sim: Outro diagnóstico</option>
+      <option value="suspeita">Tenho suspeita, mas nunca confirmei</option>
+    </select>
+  </div>
+
+  <div class="options-grid single" id="tratGrid">
+    <div style="font-size:14px; font-weight:700; color:var(--navy); margin-bottom:10px; margin-top:6px">
+      O que impediu ou impede você de buscar ajuda? (selecione os que se aplicam)
+    </div>
+    <button class="option-btn" onclick="toggleOption(this,'barreiras')">
+      <span class="opt-icon">💸</span><span class="opt-text">Custo financeiro do tratamento</span><span class="opt-check"></span>
+    </button>
+    <button class="option-btn" onclick="toggleOption(this,'barreiras')">
+      <span class="opt-icon">⏱️</span><span class="opt-text">Falta de tempo para comparecer às consultas</span><span class="opt-check"></span>
+    </button>
+    <button class="option-btn" onclick="toggleOption(this,'barreiras')">
+      <span class="opt-icon">🌍</span><span class="opt-text">Moro fora do Brasil e não encontro profissional</span><span class="opt-check"></span>
+    </button>
+    <button class="option-btn" onclick="toggleOption(this,'barreiras')">
+      <span class="opt-icon">❓</span><span class="opt-text">Não sabia que precisava ou podia buscar ajuda</span><span class="opt-check"></span>
+    </button>
+    <button class="option-btn" onclick="toggleOption(this,'barreiras')">
+      <span class="opt-icon">✅</span><span class="opt-text">Não tive barreiras, busco ajuda quando preciso</span><span class="opt-check"></span>
+    </button>
+  </div>
+
+  <div id="err6" class="error-msg">Por favor, responda todos os campos para continuar.</div>
+  <div class="nav-buttons">
+    <button class="btn-back" onclick="prevStep(6)">← Voltar</button>
+    <button class="btn-next" onclick="nextStep(6)">Continuar →</button>
+  </div>
+</div>
+
+<!-- STEP 7: Impacto funcional -->
+<div class="step" id="step7">
+  <div class="step-header">
+    <div class="step-number">Etapa 07 · Impacto na Vida Cotidiana</div>
+    <div class="step-title">Como tudo isso está afetando sua rotina?</div>
+    <div class="step-desc">Avalie o impacto real que você sente nas diferentes áreas da sua vida.</div>
+  </div>
+
+  <div class="scale-wrap">
+    <div class="scale-question">Meu desempenho no trabalho ou nos estudos caiu visivelmente.</div>
+    <div class="scale-buttons" data-scale="imp1">
+      <button class="scale-btn" onclick="selectScale(this,'imp1',1)">1</button>
+      <button class="scale-btn" onclick="selectScale(this,'imp1',2)">2</button>
+      <button class="scale-btn" onclick="selectScale(this,'imp1',3)">3</button>
+      <button class="scale-btn" onclick="selectScale(this,'imp1',4)">4</button>
+      <button class="scale-btn" onclick="selectScale(this,'imp1',5)">5</button>
+    </div>
+    <div class="scale-labels"><span>Quase nunca</span><span>O tempo todo</span></div>
+  </div>
+
+  <div class="scale-wrap">
+    <div class="scale-question">Tenho dificuldade de tomar decisões, mesmo sobre coisas simples.</div>
+    <div class="scale-buttons" data-scale="imp2">
+      <button class="scale-btn" onclick="selectScale(this,'imp2',1)">1</button>
+      <button class="scale-btn" onclick="selectScale(this,'imp2',2)">2</button>
+      <button class="scale-btn" onclick="selectScale(this,'imp2',3)">3</button>
+      <button class="scale-btn" onclick="selectScale(this,'imp2',4)">4</button>
+      <button class="scale-btn" onclick="selectScale(this,'imp2',5)">5</button>
+    </div>
+    <div class="scale-labels"><span>Quase nunca</span><span>O tempo todo</span></div>
+  </div>
+
+  <div class="scale-wrap">
+    <div class="scale-question">Sinto que minha qualidade de vida piorou nos últimos meses.</div>
+    <div class="scale-buttons" data-scale="imp3">
+      <button class="scale-btn" onclick="selectScale(this,'imp3',1)">1</button>
+      <button class="scale-btn" onclick="selectScale(this,'imp3',2)">2</button>
+      <button class="scale-btn" onclick="selectScale(this,'imp3',3)">3</button>
+      <button class="scale-btn" onclick="selectScale(this,'imp3',4)">4</button>
+      <button class="scale-btn" onclick="selectScale(this,'imp3',5)">5</button>
+    </div>
+    <div class="scale-labels"><span>Quase nunca</span><span>O tempo todo</span></div>
+  </div>
+
+  <div class="scale-wrap">
+    <div class="scale-question">Tenho negligenciado minha saúde física (alimentação, exercício, consultas médicas).</div>
+    <div class="scale-buttons" data-scale="imp4">
+      <button class="scale-btn" onclick="selectScale(this,'imp4',1)">1</button>
+      <button class="scale-btn" onclick="selectScale(this,'imp4',2)">2</button>
+      <button class="scale-btn" onclick="selectScale(this,'imp4',3)">3</button>
+      <button class="scale-btn" onclick="selectScale(this,'imp4',4)">4</button>
+      <button class="scale-btn" onclick="selectScale(this,'imp4',5)">5</button>
+    </div>
+    <div class="scale-labels"><span>Quase nunca</span><span>O tempo todo</span></div>
+  </div>
+
+  <div id="err7" class="error-msg">Responda todas as perguntas para continuar.</div>
+  <div class="nav-buttons">
+    <button class="btn-back" onclick="prevStep(7)">← Voltar</button>
+    <button class="btn-next" onclick="nextStep(7)">Continuar →</button>
+  </div>
+</div>
+
+<!-- STEP 8: Motivação e expectativa -->
+<div class="step" id="step8">
+  <div class="step-header">
+    <div class="step-number">Etapa 08 · O Que Você Busca</div>
+    <div class="step-title">O que você mais deseja transformar na sua vida?</div>
+    <div class="step-desc">Sua resposta ajuda a personalizar o resultado final da sua análise.</div>
+  </div>
+  <div class="options-grid single" id="motivacaoGrid">
+    <button class="option-btn" onclick="selectSingle(this,'motivacao')">
+      <span class="opt-icon">🧠</span><span class="opt-text">Entender como minha mente funciona de verdade</span><span class="opt-check"></span>
+    </button>
+    <button class="option-btn" onclick="selectSingle(this,'motivacao')">
+      <span class="opt-icon">💼</span><span class="opt-text">Retomar minha vida profissional e sair do estagnado</span><span class="opt-check"></span>
+    </button>
+    <button class="option-btn" onclick="selectSingle(this,'motivacao')">
+      <span class="opt-icon">😌</span><span class="opt-text">Ter paz mental e controlar minha ansiedade</span><span class="opt-check"></span>
+    </button>
+    <button class="option-btn" onclick="selectSingle(this,'motivacao')">
+      <span class="opt-icon">🎯</span><span class="opt-text">Tomar decisões com mais clareza e segurança</span><span class="opt-check"></span>
+    </button>
+    <button class="option-btn" onclick="selectSingle(this,'motivacao')">
+      <span class="opt-icon">🔍</span><span class="opt-text">Receber um diagnóstico preciso do meu perfil neurológico</span><span class="opt-check"></span>
+    </button>
+    <button class="option-btn" onclick="selectSingle(this,'motivacao')">
+      <span class="opt-icon">🌱</span><span class="opt-text">Melhorar meus relacionamentos e me sentir menos sozinho(a)</span><span class="opt-check"></span>
+    </button>
+  </div>
+
+  <div class="field" style="margin-top:20px">
+    <label>Há quanto tempo você convive com essas dificuldades?</label>
+    <select id="tempoDificuldade">
+      <option value="">Selecione</option>
+      <option value="recente">Menos de 3 meses</option>
+      <option value="medio">Entre 3 meses e 1 ano</option>
+      <option value="longo">Entre 1 e 3 anos</option>
+      <option value="cronico">Mais de 3 anos</option>
+    </select>
+  </div>
+
+  <div id="err8" class="error-msg">Selecione uma opção e o tempo de dificuldade para continuar.</div>
+  <div class="nav-buttons">
+    <button class="btn-back" onclick="prevStep(8)">← Voltar</button>
+    <button class="btn-next gold" onclick="nextStep(8)">Gerar meu Mapa Emocional →</button>
+  </div>
+</div>
+
+<!-- STEP 9: RESULTADO -->
+<div class="step" id="step9">
+
+  <div class="result-header">
+    <div class="result-badge" id="resultBadge"></div>
+    <div class="result-icon-big" id="resultIcon"></div>
+    <div class="result-main-title" id="resultTitle"></div>
+    <div class="result-main-sub" id="resultSub"></div>
+  </div>
+
+  <!-- GRÁFICO POR ÁREA -->
+  <div class="laudo-section">
+    <div class="laudo-section-title">Perfil por Área</div>
+    <div class="area-chart" id="areaChart"></div>
+  </div>
+
+  <!-- ANÁLISE CLÍNICA -->
+  <div class="laudo-section">
+    <div class="laudo-section-title">Análise por Domínio</div>
+    <div class="area-analysis" id="areaAnalysis"></div>
+  </div>
+
+  <!-- INDICADORES -->
+  <div class="laudo-section">
+    <div class="laudo-section-title">Indicadores Identificados</div>
+    <div class="indicators-grid" id="indicatorsGrid"></div>
+  </div>
+
+  <!-- PRÓXIMOS PASSOS -->
+  <div class="laudo-section">
+    <div class="laudo-section-title">O Que uma Avaliação Revela</div>
+    <div class="steps-list" id="stepsList"></div>
+  </div>
+
+  <!-- CTA -->
+  <div class="cta-section">
+    <h3>Seu próximo passo começa aqui</h3>
+    <p id="ctaText"></p>
+    <a class="btn-whatsapp" id="whatsappBtn" href="#" target="_blank">
+      <svg viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+      Quero conversar com a Psicóloga Lívia
+    </a>
+    <div class="urgency-note" id="urgencyNote"></div>
+  </div>
+
+  <div class="footer-sig">
+    <p><strong>Lívia Carvalho Pires Melo</strong> <span>| CRP 11-04802</span><br>
+    Psicóloga Clínica e Neuropsicóloga<br>
+    <span>@psi_liviamelo</span> · liviamelo.com.br</p>
+  </div>
+
+</div>
+</div><!-- /form-container -->
+
+<script>
+const TOTAL = 9;
+const state = {
+  nome:'', idade:'', cidade:'', profissao:'',
+  queixa:[],
+  escalas:{ atencao1:0, memoria1:0, cognitivo1:0, exec1:0, emocao1:0, ansiedade1:0 },
+  horasSono:'', sonoEscalas:{ sono1:0, sono2:0 }, sonoExtra:[],
+  relEscalas:{ rel1:0, rel2:0, rel3:0 }, redeApoio:'',
+  terapia:'', medicacao:'', diagnosticoAnterior:'', barreiras:[],
+  impEscalas:{ imp1:0, imp2:0, imp3:0, imp4:0 },
+  motivacao:'', tempoDificuldade:''
+};
+
+function updateProgress(step) {
+  const pct = Math.round(((step-1)/(TOTAL-1))*100);
+  document.getElementById('progressFill').style.width = pct+'%';
+  document.getElementById('progressText').textContent = 'Etapa '+step+' de '+TOTAL;
+  document.getElementById('progressPct').textContent = pct+'%';
+}
+
+function showStep(n) {
+  document.querySelectorAll('.step').forEach(s => s.classList.remove('active'));
+  document.getElementById('step'+n).classList.add('active');
+  updateProgress(n);
+  window.scrollTo({top:0, behavior:'smooth'});
+}
+
+function prevStep(from){ showStep(from-1); }
+
+function nextStep(from) {
+  const err = document.getElementById('err'+from);
+  if(err) err.classList.remove('show');
+
+  if(from===1){
+    state.nome = document.getElementById('nome').value.trim();
+    state.idade = document.getElementById('idade').value;
+    state.cidade = document.getElementById('cidade').value.trim();
+    state.profissao = document.getElementById('profissao').value;
+    if(!state.nome||!state.idade||!state.cidade||!state.profissao){ err.classList.add('show'); return; }
+  }
+  if(from===2){
+    if(state.queixa.length===0){ err.classList.add('show'); return; }
+  }
+  if(from===3){
+    const done = Object.values(state.escalas).every(v=>v>0);
+    if(!done){ err.classList.add('show'); return; }
+  }
+  if(from===4){
+    state.horasSono = document.getElementById('horasSono').value;
+    const sonoOk = state.sonoEscalas.sono1>0 && state.sonoEscalas.sono2>0;
+    if(!state.horasSono||!sonoOk){ err.classList.add('show'); return; }
+  }
+  if(from===5){
+    const relOk = state.relEscalas.rel1>0 && state.relEscalas.rel2>0 && state.relEscalas.rel3>0;
+    state.redeApoio = document.getElementById('redeApoio').value;
+    if(!relOk||!state.redeApoio){ err.classList.add('show'); return; }
+  }
+  if(from===6){
+    state.terapia = document.getElementById('terapia').value;
+    state.medicacao = document.getElementById('medicacao').value;
+    state.diagnosticoAnterior = document.getElementById('diagnosticoAnterior').value;
+    if(!state.terapia||!state.medicacao||!state.diagnosticoAnterior){ err.classList.add('show'); return; }
+  }
+  if(from===7){
+    const impOk = Object.values(state.impEscalas).every(v=>v>0);
+    if(!impOk){ err.classList.add('show'); return; }
+  }
+  if(from===8){
+    state.tempoDificuldade = document.getElementById('tempoDificuldade').value;
+    if(!state.motivacao||!state.tempoDificuldade){ err.classList.add('show'); return; }
+    buildResult();
+  }
+
+  showStep(from+1);
+}
+
+function toggleOption(btn, field) {
+  const val = btn.querySelector('.opt-text').textContent.trim();
+  if(btn.classList.contains('selected')){
+    btn.classList.remove('selected');
+    state[field] = state[field].filter(v=>v!==val);
+  } else {
+    btn.classList.add('selected');
+    if(!Array.isArray(state[field])) state[field]=[];
+    state[field].push(val);
+  }
+}
+
+function selectSingle(btn, field) {
+  btn.closest('.options-grid').querySelectorAll('.option-btn').forEach(b=>b.classList.remove('selected'));
+  btn.classList.add('selected');
+  state[field] = btn.querySelector('.opt-text').textContent.trim();
+}
+
+function selectScale(btn, scale, val) {
+  btn.closest('[data-scale]').querySelectorAll('.scale-btn').forEach(b=>b.classList.remove('selected'));
+  btn.classList.add('selected');
+  if(scale in state.escalas) state.escalas[scale]=val;
+  else if(scale in state.sonoEscalas) state.sonoEscalas[scale]=val;
+  else if(scale in state.relEscalas) state.relEscalas[scale]=val;
+  else if(scale in state.impEscalas) state.impEscalas[scale]=val;
+}
+
+function avg(vals){ return vals.reduce((a,b)=>a+b,0)/vals.length; }
+function pct(val, max){ return Math.round((val/max)*100); }
+
+function barClass(p){
+  if(p>=70) return 'bar-high';
+  if(p>=40) return 'bar-mid';
+  return 'bar-low';
+}
+
+function pctColor(p){
+  if(p>=70) return '#dc2626';
+  if(p>=40) return '#d97706';
+  return '#16a34a';
+}
+
+function buildResult(){
+  const nome1 = state.nome.split(' ')[0];
+
+  // PONTUAÇÕES POR ÁREA (0-100)
+  const pAtencao = pct(avg([state.escalas.atencao1, state.escalas.memoria1, state.escalas.cognitivo1]),5);
+  const pExec    = pct(avg([state.escalas.exec1, state.impEscalas.imp2]),5);
+  const pEmocao  = pct(avg([state.escalas.emocao1, state.escalas.ansiedade1, state.impEscalas.imp3]),5);
+  const pSono    = pct(avg([state.sonoEscalas.sono1, state.sonoEscalas.sono2]),5);
+  const pVinculos= pct(avg([state.relEscalas.rel1, state.relEscalas.rel2, state.relEscalas.rel3]),5);
+  const pImpacto = pct(avg([state.impEscalas.imp1, state.impEscalas.imp3, state.impEscalas.imp4]),5);
+
+  const global = Math.round((pAtencao+pExec+pEmocao+pSono+pVinculos+pImpacto)/6);
+
+  // HEADER
+  let badge, icon, title, sub, ctaMsg, urgency;
+
+  if(global>=65){
+    badge = '<span class="result-badge badge-alto">Atenção Elevada</span>';
+    icon = '🔴';
+    title = nome1+', seu Mapa Emocional indica sobrecarga significativa em múltiplas áreas';
+    sub = 'Os dados revelam um padrão de comprometimento cognitivo e emocional que merece atenção especializada. Quanto antes você agir, mais rápida será a recuperação.';
+    urgency = '⏱ Vagas limitadas para avaliação online este mês.';
+    ctaMsg = `Olá, Lívia! Acabei de completar o Mapa Emocional. Meu resultado indicou ATENÇÃO ELEVADA (${global}%) com sobrecarga em múltiplas áreas. Gostaria de saber mais sobre a Avaliação Neuropsicológica.`;
+  } else if(global>=40){
+    badge = '<span class="result-badge badge-moderado">Sinais de Alerta</span>';
+    icon = '🟡';
+    title = nome1+', seu Mapa Emocional identifica sinais de alerta que pedem atenção';
+    sub = 'Você está em um momento em que agir com clareza faz toda a diferença. Os padrões identificados sugerem que uma avaliação detalhada pode trazer respostas importantes.';
+    urgency = '✦ Uma avaliação agora evita que esses sinais se agravem.';
+    ctaMsg = `Olá, Lívia! Acabei de completar o Mapa Emocional. Meu resultado indicou SINAIS DE ALERTA (${global}%). Gostaria de saber mais sobre a Avaliação Neuropsicológica.`;
+  } else {
+    badge = '<span class="result-badge badge-leve">Perfil em Equilíbrio</span>';
+    icon = '🟢';
+    title = nome1+', seu Mapa Emocional aponta um perfil relativamente equilibrado';
+    sub = 'Mesmo com pontuação mais baixa, uma avaliação neuropsicológica pode revelar aspectos do seu perfil cognitivo que ampliam seu potencial e autoconhecimento.';
+    urgency = '✦ Conhecer seu perfil é sempre um diferencial.';
+    ctaMsg = `Olá, Lívia! Acabei de completar o Mapa Emocional. Meu resultado indicou PERFIL EQUILIBRADO (${global}%). Gostaria de saber mais sobre a Avaliação Neuropsicológica.`;
+  }
+
+  document.getElementById('resultBadge').innerHTML = badge;
+  document.getElementById('resultIcon').textContent = icon;
+  document.getElementById('resultTitle').textContent = title;
+  document.getElementById('resultSub').textContent = sub;
+
+  // GRÁFICO POR ÁREA
+  const areas = [
+    { name: 'Atenção e Memória', pct: pAtencao },
+    { name: 'Funções Executivas', pct: pExec },
+    { name: 'Regulação Emocional', pct: pEmocao },
+    { name: 'Qualidade do Sono', pct: pSono },
+    { name: 'Vínculos e Relações', pct: pVinculos },
+    { name: 'Impacto Funcional', pct: pImpacto }
+  ];
+
+  const notes = {
+    'Atenção e Memória': { low:'Funcionamento preservado.', mid:'Sinais leves de declínio atencional.', high:'Comprometimento significativo de atenção e memória.' },
+    'Funções Executivas': { low:'Boa capacidade de organização e tomada de decisão.', mid:'Dificuldades moderadas de planejamento e decisão.', high:'Funções executivas comprometidas, impactando rotina.' },
+    'Regulação Emocional': { low:'Boa estabilidade emocional.', mid:'Sinais de ansiedade ou esgotamento emocional.', high:'Sobrecarga emocional intensa, possível burnout ou ansiedade clínica.' },
+    'Qualidade do Sono': { low:'Sono relativamente preservado.', mid:'Distúrbios leves a moderados de sono.', high:'Qualidade de sono severamente comprometida.' },
+    'Vínculos e Relações': { low:'Boa rede de suporte social.', mid:'Dificuldades moderadas de conexão e comunicação.', high:'Isolamento significativo e fragilidade vincular.' },
+    'Impacto Funcional': { low:'Funcionamento geral preservado.', mid:'Impacto moderado na qualidade de vida.', high:'Comprometimento funcional expressivo no dia a dia.' }
+  };
+
+  const chart = document.getElementById('areaChart');
+  chart.innerHTML = '';
+  areas.forEach(a => {
+    const cls = barClass(a.pct);
+    const color = pctColor(a.pct);
+    const note = a.pct>=65 ? notes[a.name].high : a.pct>=38 ? notes[a.name].mid : notes[a.name].low;
+    chart.innerHTML += `
+      <div class="area-row">
+        <div class="area-label-row">
+          <span class="area-name">${a.name}</span>
+          <span class="area-pct" style="color:${color}">${a.pct}%</span>
+        </div>
+        <div class="area-bar-bg">
+          <div class="area-bar-fill ${cls}" style="width:0%" data-w="${a.pct}%"></div>
+        </div>
+        <div class="area-note">${note}</div>
+      </div>`;
+  });
+
+  // Animar barras
+  setTimeout(()=>{
+    document.querySelectorAll('.area-bar-fill').forEach(b=>{
+      b.style.width = b.getAttribute('data-w');
+    });
+  }, 300);
+
+  // ANÁLISE CLÍNICA POR DOMÍNIO
+  const analysis = document.getElementById('areaAnalysis');
+  analysis.innerHTML = '';
+
+  function addCard(cls, icon, title, text){
+    analysis.innerHTML += `
+      <div class="analysis-card ${cls}">
+        <div class="analysis-card-title">${icon} ${title}</div>
+        <div class="analysis-card-text">${text}</div>
+      </div>`;
+  }
+
+  // Cognitivo
+  if(pAtencao>=65){
+    addCard('alert','🧠','Atenção e Memória','As respostas indicam dificuldades relevantes de concentração, memória recente e velocidade de processamento. Esse padrão pode estar associado a sobrecarga cognitiva, TDAH, ou impacto do estresse crônico sobre as funções mnésicas.');
+  } else if(pAtencao>=38){
+    addCard('warning','🧠','Atenção e Memória','Sinais leves de declínio atencional foram identificados. É comum em fases de estresse elevado, privação de sono ou início de burnout.');
+  } else {
+    addCard('ok','🧠','Atenção e Memória','Sua atenção e memória parecem estar relativamente preservadas. Uma avaliação formal pode confirmar e mapear seus pontos fortes cognitivos.');
+  }
+
+  // Executivo
+  if(pExec>=65){
+    addCard('alert','🎯','Funções Executivas','Dificuldades importantes de planejamento, organização e tomada de decisão foram sinalizadas. Esse é um dos achados centrais em casos de TDAH, burnout avançado e ansiedade clínica.');
+  } else if(pExec>=38){
+    addCard('warning','🎯','Funções Executivas','Você relata alguma dificuldade em se organizar e decidir. Isso pode refletir sobrecarga cognitiva temporária ou um padrão que merece investigação mais cuidadosa.');
+  } else {
+    addCard('ok','🎯','Funções Executivas','Suas funções executivas parecem estar operando bem. Uma avaliação pode ajudar a identificar estratégias para ampliar ainda mais seu desempenho.');
+  }
+
+  // Emocional
+  if(pEmocao>=65){
+    addCard('alert','💛','Regulação Emocional','Há indicadores expressivos de esgotamento emocional e dificuldade de regular emoções. Esse padrão é consistente com quadros de ansiedade clínica, burnout ou sobrecarga emocional crônica que necessitam de avaliação especializada.');
+  } else if(pEmocao>=38){
+    addCard('warning','💛','Regulação Emocional','Sinais de instabilidade emocional e ansiedade moderada foram identificados. Você pode estar acumulando tensão emocional sem perceber o impacto real no seu funcionamento.');
+  } else {
+    addCard('ok','💛','Regulação Emocional','Sua regulação emocional parece relativamente estável. Uma avaliação pode ajudar a entender melhor seu perfil afetivo e seus recursos internos.');
+  }
+
+  // Sono
+  if(pSono>=65){
+    addCard('alert','🌙','Qualidade do Sono','Seu sono está significativamente comprometido. A privação e a má qualidade do sono impactam diretamente memória, atenção, humor e tomada de decisão, criando um ciclo que se retroalimenta.');
+  } else if(pSono>=38){
+    addCard('warning','🌙','Qualidade do Sono','Você relata dificuldades moderadas com o sono. Mesmo distúrbios leves afetam o desempenho cognitivo e a estabilidade emocional ao longo do tempo.');
+  } else {
+    addCard('ok','🌙','Qualidade do Sono','Seu sono parece relativamente preservado, o que é um fator protetor importante para sua saúde cognitiva e emocional.');
+  }
+
+  // Vínculos
+  if(pVinculos>=65){
+    addCard('alert','🤝','Vínculos e Relações','Sinais de isolamento social e fragilidade nos vínculos foram identificados. A ausência de suporte social amplia o impacto de qualquer quadro emocional ou neurológico e merece atenção clínica.');
+  } else if(pVinculos>=38){
+    addCard('warning','🤝','Vínculos e Relações','Você demonstra alguma dificuldade de conexão e comunicação com pessoas próximas. Esse padrão pode ser tanto causa quanto consequência do estado emocional atual.');
+  } else {
+    addCard('ok','🤝','Vínculos e Relações','Seus relacionamentos parecem ser um recurso positivo. Manter vínculos saudáveis é um dos principais fatores de proteção à saúde mental.');
+  }
+
+  // INDICADORES
+  const grid = document.getElementById('indicatorsGrid');
+  grid.innerHTML = '';
+
+  function addChip(cls, icon, text){
+    grid.innerHTML += `<div class="indicator-chip ${cls}"><span class="chip-icon">${icon}</span><span>${text}</span></div>`;
+  }
+
+  if(pAtencao>=50) addChip('chip-alert','⚠️','Déficit atencional ou mnésico');
+  if(pEmocao>=65) addChip('chip-alert','⚠️','Burnout ou ansiedade clínica');
+  if(pExec>=65) addChip('chip-alert','⚠️','Disfunção executiva');
+  if(pSono>=65) addChip('chip-alert','⚠️','Distúrbio de sono significativo');
+  if(pVinculos>=65) addChip('chip-alert','⚠️','Isolamento social expressivo');
+  if(state.impEscalas.imp1>=4) addChip('chip-warn','⚡','Queda no desempenho profissional');
+  if(state.impEscalas.imp2>=4) addChip('chip-warn','⚡','Dificuldade de tomada de decisão');
+  if(state.impEscalas.imp3>=4) addChip('chip-warn','⚡','Queda na qualidade de vida');
+  if(state.escalas.ansiedade1>=4) addChip('chip-warn','⚡','Pensamento acelerado/ruminativo');
+  if(state.queixa.includes('Suspeita de TDAH, autismo ou outro perfil neurológico')) addChip('chip-warn','🔍','Investigação de perfil neurodivergente');
+  if(state.diagnosticoAnterior!=='nao'&&state.diagnosticoAnterior!=='') addChip('chip-warn','📋','Histórico de diagnóstico anterior');
+  if(state.terapia==='nunca') addChip('chip-warn','🌱','Sem histórico de suporte psicológico');
+  if(state.terapia==='faco') addChip('chip-ok','✅','Em acompanhamento psicológico atual');
+  if(pVinculos<40) addChip('chip-ok','✅','Rede de suporte social ativa');
+  if(pSono<40) addChip('chip-ok','✅','Qualidade de sono preservada');
+
+  // PRÓXIMOS PASSOS
+  const lista = document.getElementById('stepsList');
+  lista.innerHTML = `
+    <div class="step-item">
+      <div class="step-num">1</div>
+      <div class="step-item-text">
+        <strong>Mapeamento completo das funções cognitivas</strong>
+        <span>Avaliação de atenção, memória, linguagem, raciocínio e funções executivas por meio de instrumentos padronizados e validados.</span>
+      </div>
+    </div>
+    <div class="step-item">
+      <div class="step-num">2</div>
+      <div class="step-item-text">
+        <strong>Investigação do perfil emocional e comportamental</strong>
+        <span>Identificação de padrões de ansiedade, burnout, traços de TDAH, autismo ou outros perfis neurológicos com base nos seus relatos e nos dados coletados.</span>
+      </div>
+    </div>
+    <div class="step-item">
+      <div class="step-num">3</div>
+      <div class="step-item-text">
+        <strong>Laudo neuropsicológico detalhado</strong>
+        <span>Documento clínico completo com hipóteses diagnósticas, pontos fortes e vulnerabilidades, e orientações terapêuticas personalizadas.</span>
+      </div>
+    </div>
+    <div class="step-item">
+      <div class="step-num">4</div>
+      <div class="step-item-text">
+        <strong>Devolutiva e plano de intervenção</strong>
+        <span>Sessão de devolutiva para discutir os resultados e construir junto um plano de cuidado claro, adaptado ao seu perfil e objetivos de vida.</span>
+      </div>
+    </div>`;
+
+  document.getElementById('ctaText').textContent = `Com base no seu Mapa Emocional, uma conversa com a Psicóloga Lívia pode ser o primeiro passo real rumo ao autoconhecimento e à mudança que você está buscando.`;
+  document.getElementById('urgencyNote').textContent = urgency;
+
+  const whatsMsg = encodeURIComponent(ctaMsg);
+  document.getElementById('whatsappBtn').href = `https://wa.me/5585996167976?text=${whatsMsg}`;
+}
+
+updateProgress(1);
+</script>
+</body>
+</html>
