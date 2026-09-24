@@ -640,7 +640,7 @@ body {
 <div class="progress-wrap">
   <div class="progress-inner">
     <div class="progress-label">
-      <span id="progressText">Etapa 1 de 9</span>
+      <span id="progressText">Etapa 1 de 10</span>
       <span id="progressPct">0%</span>
     </div>
     <div class="progress-bar"><div class="progress-fill" id="progressFill" style="width:0%"></div></div>
@@ -649,7 +649,7 @@ body {
 
 <div class="form-container">
 
-<!-- STEP 1: Dados pessoais -->
+<!-- STEP 1: Identificação -->
 <div class="step active" id="step1">
   <div class="step-header">
     <div class="step-number">Etapa 01 · Identificação</div>
@@ -689,14 +689,139 @@ body {
   </div>
   <div id="err1" class="error-msg">Por favor, preencha todos os campos para continuar.</div>
   <div class="nav-buttons">
-    <button class="btn-next" onclick="nextStep(1)">Continuar →</button>
+    <button class="btn-back" class="btn-next" onclick="nextStep(1)">Continuar →</button>
   </div>
 </div>
 
-<!-- STEP 2: Queixa principal -->
+<!-- STEP 2: Triagem / Perguntas Iniciais -->
 <div class="step" id="step2">
   <div class="step-header">
-    <div class="step-number">Etapa 02 · Queixa Principal</div>
+    <div class="step-number">Etapa 02 · Perguntas Iniciais</div>
+
+    <div class="step-title">Algumas perguntas rápidas para personalizar sua análise</div>
+    <div class="step-desc">Leva menos de 2 minutos. Seja honesto(a): não há respostas certas ou erradas.</div>
+  </div>
+
+  <!-- P1 -->
+  <div class="field">
+    <label>O que melhor descreve o principal motivo da sua busca hoje?</label>
+  </div>
+  <div class="options-grid single" id="p1Grid">
+    <button class="option-btn" onclick="selectSingle(this,'p1')">
+      <span class="opt-icon">😰</span><span class="opt-text">Ansiedade, aceleração mental ou dificuldade para desacelerar</span><span class="opt-check"></span>
+    </button>
+    <button class="option-btn" onclick="selectSingle(this,'p1')">
+      <span class="opt-icon">💔</span><span class="opt-text">Conflitos nos relacionamentos (amoroso, familiar ou profissional)</span><span class="opt-check"></span>
+    </button>
+    <button class="option-btn" onclick="selectSingle(this,'p1')">
+      <span class="opt-icon">🪫</span><span class="opt-text">Sensação de sobrecarga, esgotamento ou desânimo constante</span><span class="opt-check"></span>
+    </button>
+    <button class="option-btn" onclick="selectSingle(this,'p1')">
+      <span class="opt-icon">🌱</span><span class="opt-text">Vontade de se autoconhecer, destravar metas ou melhorar a autoestima</span><span class="opt-check"></span>
+    </button>
+  </div>
+
+  <div style="height:18px"></div>
+
+  <!-- P2 -->
+  <div class="field">
+    <label>Há quanto tempo você sente que esse incômodo tem impactado a sua vida?</label>
+  </div>
+  <div class="options-grid single" id="p2Grid">
+    <button class="option-btn" onclick="selectSingle(this,'p2')">
+      <span class="opt-icon">🕐</span><span class="opt-text">Começou recentemente (últimas semanas)</span><span class="opt-check"></span>
+    </button>
+    <button class="option-btn" onclick="selectSingle(this,'p2')">
+      <span class="opt-icon">📅</span><span class="opt-text">Há alguns meses, mas tenho sentido piorar</span><span class="opt-check"></span>
+    </button>
+    <button class="option-btn" onclick="selectSingle(this,'p2')">
+      <span class="opt-icon">⏳</span><span class="opt-text">Há mais de um ano / sinto que convivo com isso há muito tempo</span><span class="opt-check"></span>
+    </button>
+  </div>
+
+  <div style="height:18px"></div>
+
+  <!-- P3 -->
+  <div class="field">
+    <label>De 1 a 5, quanto isso tem atrapalhado seu trabalho, sono ou convívio com pessoas próximas?</label>
+  </div>
+  <div class="options-grid single" id="p3Grid">
+    <button class="option-btn" onclick="selectSingle(this,'p3')">
+      <span class="opt-icon">🟢</span><span class="opt-text">1 a 2 — Consigo lidar no dia a dia, mas quero evitar que piore</span><span class="opt-check"></span>
+    </button>
+    <button class="option-btn" onclick="selectSingle(this,'p3')">
+      <span class="opt-icon">🟡</span><span class="opt-text">3 — Atrapalha com frequência em dias mais estressantes</span><span class="opt-check"></span>
+    </button>
+    <button class="option-btn" onclick="selectSingle(this,'p3')">
+      <span class="opt-icon">🔴</span><span class="opt-text">4 a 5 — Tem prejudicado significativamente minha produtividade e paz mental</span><span class="opt-check"></span>
+    </button>
+  </div>
+
+  <div style="height:18px"></div>
+
+  <!-- P4 -->
+  <div class="field">
+    <label>Você já teve alguma experiência prévia com psicoterapia?</label>
+  </div>
+  <div class="options-grid single" id="p4Grid">
+    <button class="option-btn" onclick="selectSingle(this,'p4')">
+      <span class="opt-icon">✅</span><span class="opt-text">Sim, e quero retomar agora</span><span class="opt-check"></span>
+    </button>
+    <button class="option-btn" onclick="selectSingle(this,'p4')">
+      <span class="opt-icon">🔄</span><span class="opt-text">Já fiz no passado, mas não me adaptei com o profissional ou formato</span><span class="opt-check"></span>
+    </button>
+    <button class="option-btn" onclick="selectSingle(this,'p4')">
+      <span class="opt-icon">🌟</span><span class="opt-text">Nunca fiz, seria a minha primeira vez</span><span class="opt-check"></span>
+    </button>
+  </div>
+
+  <div style="height:18px"></div>
+
+  <!-- P5 -->
+  <div class="field">
+    <label>Qual formato de atendimento melhor se encaixa na sua rotina atual?</label>
+  </div>
+  <div class="options-grid single" id="p5Grid">
+    <button class="option-btn" onclick="selectSingle(this,'p5')">
+      <span class="opt-icon">💻</span><span class="opt-text">Online (atendimento no conforto de casa ou onde estiver)</span><span class="opt-check"></span>
+    </button>
+    <button class="option-btn" onclick="selectSingle(this,'p5')">
+      <span class="opt-icon">🏢</span><span class="opt-text">Presencial</span><span class="opt-check"></span>
+    </button>
+    <button class="option-btn" onclick="selectSingle(this,'p5')">
+      <span class="opt-icon">🤔</span><span class="opt-text">Tanto faz / Gostaria de entender o que funciona melhor para o meu caso</span><span class="opt-check"></span>
+    </button>
+  </div>
+
+  <div style="height:18px"></div>
+
+  <!-- P6 -->
+  <div class="field">
+    <label>Para agendamentos e acompanhamento contínuo, qual período do dia você costuma ter mais flexibilidade?</label>
+  </div>
+  <div class="options-grid" id="p6Grid">
+    <button class="option-btn" onclick="selectSingle(this,'p6')">
+      <span class="opt-icon">🌅</span><span class="opt-text">Manhã</span><span class="opt-check"></span>
+    </button>
+    <button class="option-btn" onclick="selectSingle(this,'p6')">
+      <span class="opt-icon">☀️</span><span class="opt-text">Tarde</span><span class="opt-check"></span>
+    </button>
+    <button class="option-btn" onclick="selectSingle(this,'p6')">
+      <span class="opt-icon">🌙</span><span class="opt-text">Noite / Fim de tarde</span><span class="opt-check"></span>
+    </button>
+  </div>
+
+  <div id="err2" class="error-msg">Por favor, responda todas as perguntas para continuar.</div>
+  <div class="nav-buttons">
+    <button class="btn-back" onclick="prevStep(2)">← Voltar</button>
+    <button class="btn-next" onclick="nextStep(2)">Continuar →</button>
+  </div>
+</div>
+
+<!-- STEP 3: Queixa principal -->
+<div class="step" id="step3">
+  <div class="step-header">
+    <div class="step-number">Etapa 03 · Queixa Principal</div>
     <div class="step-title">O que mais está pesando em você agora?</div>
     <div class="step-desc">Selecione tudo que faz sentido. Não precisa escolher apenas um.</div>
   </div>
@@ -726,17 +851,17 @@ body {
       <span class="opt-icon">💔</span><span class="opt-text">Dificuldades em relacionamentos ou isolamento social</span><span class="opt-check"></span>
     </button>
   </div>
-  <div id="err2" class="error-msg">Selecione pelo menos uma opção para continuar.</div>
+  <div id="err3" class="error-msg">Selecione pelo menos uma opção para continuar.</div>
   <div class="nav-buttons">
-    <button class="btn-back" onclick="prevStep(2)">← Voltar</button>
-    <button class="btn-next" onclick="nextStep(2)">Continuar →</button>
+    <button class="btn-back" onclick="prevStep(3)">← Voltar</button>
+    <button class="btn-next" onclick="nextStep(3)">Continuar →</button>
   </div>
 </div>
 
-<!-- STEP 3: Escalas cognitivas e emocionais -->
-<div class="step" id="step3">
+<!-- STEP 4: Escalas cognitivas e emocionais -->
+<div class="step" id="step4">
   <div class="step-header">
-    <div class="step-number">Etapa 03 · Funcionamento Cognitivo e Emocional</div>
+    <div class="step-number">Etapa 04 · Funcionamento Cognitivo e Emocional</div>
     <div class="step-title">Com que frequência você experimenta as situações abaixo?</div>
     <div class="step-desc">1 = quase nunca &nbsp;|&nbsp; 5 = o tempo todo</div>
   </div>
@@ -807,17 +932,17 @@ body {
     </div>
   </div>
 
-  <div id="err3" class="error-msg">Responda todas as perguntas para continuar.</div>
+  <div id="err4" class="error-msg">Responda todas as perguntas para continuar.</div>
   <div class="nav-buttons">
-    <button class="btn-back" onclick="prevStep(3)">← Voltar</button>
-    <button class="btn-next" onclick="nextStep(3)">Continuar →</button>
+    <button class="btn-back" onclick="prevStep(4)">← Voltar</button>
+    <button class="btn-next" onclick="nextStep(4)">Continuar →</button>
   </div>
 </div>
 
-<!-- STEP 4: Sono -->
-<div class="step" id="step4">
+<!-- STEP 5: Sono -->
+<div class="step" id="step5">
   <div class="step-header">
-    <div class="step-number">Etapa 04 · Qualidade do Sono</div>
+    <div class="step-number">Etapa 05 · Qualidade do Sono</div>
     <div class="step-title">Como está o seu sono?</div>
     <div class="step-desc">O sono é um dos principais indicadores do estado neurológico e emocional.</div>
   </div>
@@ -876,17 +1001,17 @@ body {
     </button>
   </div>
 
-  <div id="err4" class="error-msg">Por favor, preencha os campos de sono para continuar.</div>
+  <div id="err5" class="error-msg">Por favor, preencha os campos de sono para continuar.</div>
   <div class="nav-buttons">
-    <button class="btn-back" onclick="prevStep(4)">← Voltar</button>
-    <button class="btn-next" onclick="nextStep(4)">Continuar →</button>
+    <button class="btn-back" onclick="prevStep(5)">← Voltar</button>
+    <button class="btn-next" onclick="nextStep(5)">Continuar →</button>
   </div>
 </div>
 
-<!-- STEP 5: Relacionamentos -->
-<div class="step" id="step5">
+<!-- STEP 6: Relacionamentos -->
+<div class="step" id="step6">
   <div class="step-header">
-    <div class="step-number">Etapa 05 · Vínculos e Relacionamentos</div>
+    <div class="step-number">Etapa 06 · Vínculos e Relacionamentos</div>
     <div class="step-title">Como estão seus relacionamentos e vida social?</div>
     <div class="step-desc">Vínculos afetivos têm impacto direto na saúde mental e cognitiva.</div>
   </div>
@@ -938,17 +1063,17 @@ body {
     </select>
   </div>
 
-  <div id="err5" class="error-msg">Responda todas as perguntas para continuar.</div>
+  <div id="err6" class="error-msg">Responda todas as perguntas para continuar.</div>
   <div class="nav-buttons">
-    <button class="btn-back" onclick="prevStep(5)">← Voltar</button>
-    <button class="btn-next" onclick="nextStep(5)">Continuar →</button>
+    <button class="btn-back" onclick="prevStep(6)">← Voltar</button>
+    <button class="btn-next" onclick="nextStep(6)">Continuar →</button>
   </div>
 </div>
 
-<!-- STEP 6: Histórico de tratamento -->
-<div class="step" id="step6">
+<!-- STEP 7: Histórico de tratamento -->
+<div class="step" id="step7">
   <div class="step-header">
-    <div class="step-number">Etapa 06 · Histórico de Tratamento</div>
+    <div class="step-number">Etapa 07 · Histórico de Tratamento</div>
     <div class="step-title">Você já buscou algum tipo de ajuda profissional?</div>
     <div class="step-desc">Essas informações ajudam a entender melhor o seu histórico e o que ainda precisa ser investigado.</div>
   </div>
@@ -1009,17 +1134,17 @@ body {
     </button>
   </div>
 
-  <div id="err6" class="error-msg">Por favor, responda todos os campos para continuar.</div>
+  <div id="err7" class="error-msg">Por favor, responda todos os campos para continuar.</div>
   <div class="nav-buttons">
-    <button class="btn-back" onclick="prevStep(6)">← Voltar</button>
-    <button class="btn-next" onclick="nextStep(6)">Continuar →</button>
+    <button class="btn-back" onclick="prevStep(7)">← Voltar</button>
+    <button class="btn-next" onclick="nextStep(7)">Continuar →</button>
   </div>
 </div>
 
-<!-- STEP 7: Impacto funcional -->
-<div class="step" id="step7">
+<!-- STEP 8: Impacto funcional -->
+<div class="step" id="step8">
   <div class="step-header">
-    <div class="step-number">Etapa 07 · Impacto na Vida Cotidiana</div>
+    <div class="step-number">Etapa 08 · Impacto na Vida Cotidiana</div>
     <div class="step-title">Como tudo isso está afetando sua rotina?</div>
     <div class="step-desc">Avalie o impacto real que você sente nas diferentes áreas da sua vida.</div>
   </div>
@@ -1072,17 +1197,17 @@ body {
     <div class="scale-labels"><span>Quase nunca</span><span>O tempo todo</span></div>
   </div>
 
-  <div id="err7" class="error-msg">Responda todas as perguntas para continuar.</div>
+  <div id="err8" class="error-msg">Responda todas as perguntas para continuar.</div>
   <div class="nav-buttons">
-    <button class="btn-back" onclick="prevStep(7)">← Voltar</button>
-    <button class="btn-next" onclick="nextStep(7)">Continuar →</button>
+    <button class="btn-back" onclick="prevStep(8)">← Voltar</button>
+    <button class="btn-next" onclick="nextStep(8)">Continuar →</button>
   </div>
 </div>
 
-<!-- STEP 8: Motivação e expectativa -->
-<div class="step" id="step8">
+<!-- STEP 9: Motivação e expectativa -->
+<div class="step" id="step9">
   <div class="step-header">
-    <div class="step-number">Etapa 08 · O Que Você Busca</div>
+    <div class="step-number">Etapa 09 · O Que Você Busca</div>
     <div class="step-title">O que você mais deseja transformar na sua vida?</div>
     <div class="step-desc">Sua resposta ajuda a personalizar o resultado final da sua análise.</div>
   </div>
@@ -1118,15 +1243,15 @@ body {
     </select>
   </div>
 
-  <div id="err8" class="error-msg">Selecione uma opção e o tempo de dificuldade para continuar.</div>
+  <div id="err9" class="error-msg">Selecione uma opção e o tempo de dificuldade para continuar.</div>
   <div class="nav-buttons">
-    <button class="btn-back" onclick="prevStep(8)">← Voltar</button>
-    <button class="btn-next gold" onclick="nextStep(8)">Gerar meu Mapa Emocional →</button>
+    <button class="btn-back" onclick="prevStep(9)">← Voltar</button>
+    <button class="btn-next gold" onclick="nextStep(9)">Gerar meu Mapa Emocional →</button>
   </div>
 </div>
 
-<!-- STEP 9: RESULTADO -->
-<div class="step" id="step9">
+<!-- STEP 10: RESULTADO -->
+<div class="step" id="step10">
 
   <div class="result-header">
     <div class="result-badge" id="resultBadge"></div>
@@ -1180,8 +1305,11 @@ body {
 </div><!-- /form-container -->
 
 <script>
-const TOTAL = 9;
+const TOTAL = 10;
 const state = {
+  // Triagem
+  p1:'', p2:'', p3:'', p4:'', p5:'', p6:'',
+  // Dados
   nome:'', idade:'', cidade:'', profissao:'',
   queixa:[],
   escalas:{ atencao1:0, memoria1:0, cognitivo1:0, exec1:0, emocao1:0, ansiedade1:0 },
@@ -1212,43 +1340,67 @@ function nextStep(from) {
   const err = document.getElementById('err'+from);
   if(err) err.classList.remove('show');
 
+  // STEP 1: Identificação
   if(from===1){
     state.nome = document.getElementById('nome').value.trim();
     state.idade = document.getElementById('idade').value;
     state.cidade = document.getElementById('cidade').value.trim();
     state.profissao = document.getElementById('profissao').value;
     if(!state.nome||!state.idade||!state.cidade||!state.profissao){ err.classList.add('show'); return; }
+    sendToSheets(buildSheetPayload(1));
   }
+  // STEP 2: Triagem / Perguntas Iniciais
   if(from===2){
-    if(state.queixa.length===0){ err.classList.add('show'); return; }
+    if(!state.p1||!state.p2||!state.p3||!state.p4||!state.p5||!state.p6){
+      err.classList.add('show'); return;
+    }
+    sendToSheets(buildSheetPayload(2));
   }
+
+  // STEP 3: Queixa principal (antigo step2)
   if(from===3){
+    if(state.queixa.length===0){ err.classList.add('show'); return; }
+    sendToSheets(buildSheetPayload(3));
+  }
+  // STEP 4: Escalas cognitivas (antigo step3)
+  if(from===4){
     const done = Object.values(state.escalas).every(v=>v>0);
     if(!done){ err.classList.add('show'); return; }
+    sendToSheets(buildSheetPayload(4));
   }
-  if(from===4){
+  // STEP 5: Sono (antigo step4)
+  if(from===5){
     state.horasSono = document.getElementById('horasSono').value;
     const sonoOk = state.sonoEscalas.sono1>0 && state.sonoEscalas.sono2>0;
     if(!state.horasSono||!sonoOk){ err.classList.add('show'); return; }
+    sendToSheets(buildSheetPayload(5));
   }
-  if(from===5){
+  // STEP 6: Relacionamentos (antigo step5)
+  if(from===6){
     const relOk = state.relEscalas.rel1>0 && state.relEscalas.rel2>0 && state.relEscalas.rel3>0;
     state.redeApoio = document.getElementById('redeApoio').value;
     if(!relOk||!state.redeApoio){ err.classList.add('show'); return; }
+    sendToSheets(buildSheetPayload(6));
   }
-  if(from===6){
+  // STEP 7: Histórico (antigo step6)
+  if(from===7){
     state.terapia = document.getElementById('terapia').value;
     state.medicacao = document.getElementById('medicacao').value;
     state.diagnosticoAnterior = document.getElementById('diagnosticoAnterior').value;
     if(!state.terapia||!state.medicacao||!state.diagnosticoAnterior){ err.classList.add('show'); return; }
+    sendToSheets(buildSheetPayload(7));
   }
-  if(from===7){
+  // STEP 8: Impacto (antigo step7)
+  if(from===8){
     const impOk = Object.values(state.impEscalas).every(v=>v>0);
     if(!impOk){ err.classList.add('show'); return; }
+    sendToSheets(buildSheetPayload(8));
   }
-  if(from===8){
+  // STEP 9: Motivação (antigo step8) → gera resultado e vai para step10
+  if(from===9){
     state.tempoDificuldade = document.getElementById('tempoDificuldade').value;
     if(!state.motivacao||!state.tempoDificuldade){ err.classList.add('show'); return; }
+    sendToSheets(buildSheetPayload(10));
     buildResult();
   }
 
@@ -1271,6 +1423,67 @@ function selectSingle(btn, field) {
   btn.closest('.options-grid').querySelectorAll('.option-btn').forEach(b=>b.classList.remove('selected'));
   btn.classList.add('selected');
   state[field] = btn.querySelector('.opt-text').textContent.trim();
+}
+
+
+function sendToSheets(data) {
+  fetch('https://api.sheetmonkey.io/form/6H1Posyi6c9cgGn1QPWXdN', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify(data)
+  }).catch(e => console.log('SheetMonkey error:', e));
+}
+
+function buildSheetPayload(etapaAtual) {
+  return {
+    // Controle
+    'Data_Hora': new Date().toLocaleString('pt-BR'),
+    'Etapa_Concluida': etapaAtual,
+    'Status': etapaAtual === 10 ? 'Completo' : 'Parcial',
+    // Identificação
+    'Nome': state.nome || '',
+    'Idade': state.idade || '',
+    'Cidade': state.cidade || '',
+    'Situacao_Profissional': state.profissao || '',
+    // Triagem
+    'Motivo_Busca': state.p1 || '',
+    'Tempo_Impacto': state.p2 || '',
+    'Nivel_Impacto': state.p3 || '',
+    'Historico_Terapia': state.p4 || '',
+    'Formato_Preferido': state.p5 || '',
+    'Periodo_Disponivel': state.p6 || '',
+    // Queixa
+    'Queixas_Principais': state.queixa.join(' | ') || '',
+    // Sono
+    'Horas_Sono': state.horasSono || '',
+    'Padroes_Sono': state.sonoExtra.join(' | ') || '',
+    // Relacionamentos
+    'Rede_Apoio': state.redeApoio || '',
+    // Histórico clínico
+    'Psicoterapia_Anterior': state.terapia || '',
+    'Uso_Medicacao': state.medicacao || '',
+    'Diagnostico_Anterior': state.diagnosticoAnterior || '',
+    'Barreiras_Tratamento': state.barreiras.join(' | ') || '',
+    // Motivação
+    'Objetivo_Principal': state.motivacao || '',
+    'Tempo_Dificuldade': state.tempoDificuldade || '',
+    // Escalas (scores)
+    'Score_Atencao': state.escalas.atencao1 || 0,
+    'Score_Memoria': state.escalas.memoria1 || 0,
+    'Score_Cognitivo': state.escalas.cognitivo1 || 0,
+    'Score_Exec': state.escalas.exec1 || 0,
+    'Score_Emocao': state.escalas.emocao1 || 0,
+    'Score_Ansiedade': state.escalas.ansiedade1 || 0,
+    'Score_Sono1': state.sonoEscalas.sono1 || 0,
+    'Score_Sono2': state.sonoEscalas.sono2 || 0,
+    'Score_Rel1': state.relEscalas.rel1 || 0,
+    'Score_Rel2': state.relEscalas.rel2 || 0,
+    'Score_Rel3': state.relEscalas.rel3 || 0,
+    'Score_Imp1': state.impEscalas.imp1 || 0,
+    'Score_Imp2': state.impEscalas.imp2 || 0,
+    'Score_Imp3': state.impEscalas.imp3 || 0,
+    'Score_Imp4': state.impEscalas.imp4 || 0,
+  };
 }
 
 function selectScale(btn, scale, val) {
