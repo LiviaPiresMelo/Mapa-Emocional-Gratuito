@@ -1347,40 +1347,34 @@ function nextStep(from) {
     state.cidade = document.getElementById('cidade').value.trim();
     state.profissao = document.getElementById('profissao').value;
     if(!state.nome||!state.idade||!state.cidade||!state.profissao){ err.classList.add('show'); return; }
-    sendToSheets(buildSheetPayload(1));
   }
   // STEP 2: Triagem / Perguntas Iniciais
   if(from===2){
     if(!state.p1||!state.p2||!state.p3||!state.p4||!state.p5||!state.p6){
       err.classList.add('show'); return;
     }
-    sendToSheets(buildSheetPayload(2));
   }
 
   // STEP 3: Queixa principal (antigo step2)
   if(from===3){
     if(state.queixa.length===0){ err.classList.add('show'); return; }
-    sendToSheets(buildSheetPayload(3));
   }
   // STEP 4: Escalas cognitivas (antigo step3)
   if(from===4){
     const done = Object.values(state.escalas).every(v=>v>0);
     if(!done){ err.classList.add('show'); return; }
-    sendToSheets(buildSheetPayload(4));
   }
   // STEP 5: Sono (antigo step4)
   if(from===5){
     state.horasSono = document.getElementById('horasSono').value;
     const sonoOk = state.sonoEscalas.sono1>0 && state.sonoEscalas.sono2>0;
     if(!state.horasSono||!sonoOk){ err.classList.add('show'); return; }
-    sendToSheets(buildSheetPayload(5));
   }
   // STEP 6: Relacionamentos (antigo step5)
   if(from===6){
     const relOk = state.relEscalas.rel1>0 && state.relEscalas.rel2>0 && state.relEscalas.rel3>0;
     state.redeApoio = document.getElementById('redeApoio').value;
     if(!relOk||!state.redeApoio){ err.classList.add('show'); return; }
-    sendToSheets(buildSheetPayload(6));
   }
   // STEP 7: Histórico (antigo step6)
   if(from===7){
@@ -1388,19 +1382,17 @@ function nextStep(from) {
     state.medicacao = document.getElementById('medicacao').value;
     state.diagnosticoAnterior = document.getElementById('diagnosticoAnterior').value;
     if(!state.terapia||!state.medicacao||!state.diagnosticoAnterior){ err.classList.add('show'); return; }
-    sendToSheets(buildSheetPayload(7));
   }
   // STEP 8: Impacto (antigo step7)
   if(from===8){
     const impOk = Object.values(state.impEscalas).every(v=>v>0);
     if(!impOk){ err.classList.add('show'); return; }
-    sendToSheets(buildSheetPayload(8));
   }
   // STEP 9: Motivação (antigo step8) → gera resultado e vai para step10
   if(from===9){
     state.tempoDificuldade = document.getElementById('tempoDificuldade').value;
     if(!state.motivacao||!state.tempoDificuldade){ err.classList.add('show'); return; }
-    sendToSheets(buildSheetPayload(10));
+    sendToSheets(buildSheetPayload());
     buildResult();
   }
 
@@ -1434,12 +1426,11 @@ function sendToSheets(data) {
   }).catch(e => console.log('SheetMonkey error:', e));
 }
 
-function buildSheetPayload(etapaAtual) {
+function buildSheetPayload() {
   return {
     // Controle
     'Data_Hora': new Date().toLocaleString('pt-BR'),
-    'Etapa_Concluida': etapaAtual,
-    'Status': etapaAtual === 10 ? 'Completo' : 'Parcial',
+    'Status': 'Completo',
     // Identificação
     'Nome': state.nome || '',
     'Idade': state.idade || '',
